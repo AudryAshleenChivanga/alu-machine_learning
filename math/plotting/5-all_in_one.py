@@ -54,7 +54,7 @@ ax2.set_ylabel('Weight (lbs)', fontsize='x-small')
 ax3 = fig.add_subplot(gs[1, 0])
 ax3.plot(x2, y2)
 ax3.set_yscale('log')
-ax3.set_xlim(0, 20000)  # Set x-axis limit to 20000 to match the desired tick marks
+ax3.set_xlim(0, 28650)  # Set x-axis limit to 20000 to match the desired tick marks
 ax3.set_xticks([0, 10000, 20000])  # Correctly set x-axis ticks to 0, 10000, 20000
 ax3.set_title('Exponential Decay of C-14', fontsize='x-small')
 ax3.set_xlabel('Time (years)', fontsize='x-small')
