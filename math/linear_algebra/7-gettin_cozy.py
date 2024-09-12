@@ -13,14 +13,14 @@ def cat_matrices2D(mat1, mat2, axis=0):
     if not mat1 or not mat2:
         return None
 
-    # If concatenating along axis 0 (rows), check if both have the same number of columns
+    # Concatenating
     if axis == 0:
         if len(mat1[0]) != len(mat2[0]):
             return None
         # Create a new matrix by concatenating along the rows
         return [row[:] for row in mat1] + [row[:] for row in mat2]
 
-    # If concatenating along axis 1 (columns), check if both have the same number of rows
+    # If concatenating along axis 1
     elif axis == 1:
         if len(mat1) != len(mat2):
             return None
