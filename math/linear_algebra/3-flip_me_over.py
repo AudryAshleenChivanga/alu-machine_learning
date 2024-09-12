@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
 
+    """
+    This modul3 returns a transpose of a 2D matrix .
+    """
+
+
 def matrix_transpose(matrix):
     """
     Returns the transpose of a 2D matrix.
