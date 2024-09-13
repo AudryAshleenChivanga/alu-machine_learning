@@ -59,6 +59,7 @@ def add_recursive(mat1, mat2):
         A new matrix that is the result of element-wise addition.
     """
     if isinstance(mat1, list):
-        return [add_recursive(sub_mat1, sub_mat2) for sub_mat1, sub_mat2 in zip(mat1, mat2)]
+        return [add_recursive(sub_mat1, sub_mat2) for sub_mat1, sub_mat2
+                in zip(mat1, mat2)]
     else:
         return mat1 + mat2

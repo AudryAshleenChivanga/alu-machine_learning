@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-    This matrix slices a matrix along specific axes (hahaha just like a ninja
+This script slices a matrix along specific axes (hahaha just like a ninja).
 """
 
 import numpy as np
@@ -18,12 +18,17 @@ def np_slice(matrix, axes={}):
     Returns:
         A new numpy.ndarray that has been sliced along the specified axes.
     """
-    # Create a tuple of slices for all axes, defaulting to full slice ':'
-    slices = [slice(None)] * matrix.ndim
+    if not axes:  # If no axes are provided, return the matrix as is
+        return matrix[...]
 
-    # Update slices according to the axes dictionary
-    for axis, slice_range in axes.items():
-        slices[axis] = slice(*slice_range)
+    slices = []
+    for i in range(matrix.ndim):  # Iterate over each dimension of the matrix
+        if i in axes:
+            slices.append(slice(*axes[i]))  # Append the slice specified for this axis
+        else:
+            slices.append(slice(None))  # Append a default slice (':') if no slice is specified for this axis
 
-    # Use tuple of slices to slice the matrix
-    return matrix[tuple(slices)]
+    return matrix[tuple(slices)]  # Return the sliced matrix
+mat1 = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+print(np_slice(mat1, axes={1: (1, 3)}))  # Output sliced matrix
+print(mat1)
