@@ -1,32 +1,31 @@
 #!/usr/bin/env python3
 """
-Slice numpy arrays
+Slice arrays along specific axes
 """
-import numpy as np
-
 
 def np_slice(matrix, axes=None):
-    """Slices a matrix along specific axes
+    """Slices a matrix (list of lists) along specific axes
 
     Args:
-        matrix (numpy.ndarray): matrix to slice
+        matrix (list of lists): matrix to slice
         axes (dict): dictionary where the key is an axis to slice along and
                      the value is a tuple representing the slice to make along
                      that axis
 
     Returns:
-        numpy.ndarray: the sliced matrix
+        list of lists: the sliced matrix
     """
     if axes is None:
-        return matrix[...]
+        return matrix
+
     slices = []
-    for i in range(matrix.ndim):
+    ndim = len(matrix.shape) if hasattr(matrix, 'shape') else len(matrix)
+
+    # Generate slices for each axis
+    for i in range(ndim):
         if i in axes:
             slices.append(slice(*axes[i]))
         else:
             slices.append(slice(None))
+
     return matrix[tuple(slices)]
-  
-mat1 = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
-print(np_slice(mat1, axes={1: (1, 3)}))
-print(mat1)
