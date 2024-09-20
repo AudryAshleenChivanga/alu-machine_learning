@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+
+
+"""
+    Determinant function !
+"""
+
+
 def determinant(matrix):
     """
     Calculates the determinant of a matrix.
@@ -10,7 +17,7 @@ def determinant(matrix):
     int/float: Determinant of the matrix.
     """
     if not isinstance(matrix, list) or not all(isinstance(row, list)
-            for row in matrix):
+    for row in matrix):
         raise TypeError("matrix must be a list of lists")
 
     if len(matrix) == 1 and len(matrix[0]) == 0:  # Handle 0x0 matrix
