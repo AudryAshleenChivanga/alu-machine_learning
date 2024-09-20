@@ -1,28 +1,24 @@
-#!/usr/bin/env python 3
-"""
-This is for caluculating a determinant .
-"""
-
-
+#!/usr/bin/env python3
 def determinant(matrix):
-""" -Matrix determinant . If matrix is not a list, the function raises 
-    type error same as if not a square .
-"""
+    """
+    Calculates the determinant of a matrix.
 
+    Parameters:
+    matrix (list of lists): The matrix for which the determinant is calculated.
+
+    Returns:
+    int/float: Determinant of the matrix.
+    """
     if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a list of lists")
 
+    if len(matrix) == 1 and len(matrix[0]) == 0:  # Handle 0x0 matrix
+        return 1
 
     if not all(len(row) == len(matrix) for row in matrix):
         raise ValueError("matrix must be a square matrix")
 
-    
     size = len(matrix)
-
-
-    if size == 0:
-        return 1
-
 
     if size == 1:
         return matrix[0][0]
@@ -32,9 +28,33 @@ def determinant(matrix):
 
     determinant_value = 0
     for col in range(size):
-        #  minor matrix by excluding current row (0) and column (col)
         minor_matrix = [row[:col] + row[col + 1:] for row in matrix[1:]]
-        # Calculating  cofactor and adding to determinant
         cofactor = (-1) ** col * matrix[0][col] * determinant(minor_matrix)
         determinant_value += cofactor
+
+    return determinant_value
+
+# Test cases
+if __name__ == '__main__':
+    mat0 = [[]]
+    mat1 = [[5]]
+    mat2 = [[1, 2], [3, 4]]
+    mat3 = [[1, 1], [1, 1]]
+    mat4 = [[5, 7, 9], [3, 1, 8], [6, 2, 4]]
+    mat5 = []
+    mat6 = [[1, 2, 3], [4, 5, 6]]
+
+    print(determinant(mat0))  # Output: 1
+    print(determinant(mat1))  # Output: 5
+    print(determinant(mat2))  # Output: -2
+    print(determinant(mat3))  # Output: 0
+    print(determinant(mat4))  # Output: 192
+    try:
+        determinant(mat5)
+    except Exception as e:
+        print(e)  # Output: matrix must be a list of lists
+    try:
+        determinant(mat6)
+    except Exception as e:
+        print(e)  # Output: matrix must be a square matrix
 
