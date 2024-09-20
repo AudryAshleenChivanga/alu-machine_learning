@@ -16,9 +16,10 @@ def determinant(matrix):
     Returns:
     int/float: Determinant of the matrix.
     """
-    if not isinstance(matrix, list) or not all(isinstance(row, list)
-    for row in matrix):
+    if not isinstance(matrix, list) or not all(
+         isinstance(row, list) for row in matrix ):
         raise TypeError("matrix must be a list of lists")
+
 
     if len(matrix) == 1 and len(matrix[0]) == 0:  # Handle 0x0 matrix
         return 1
