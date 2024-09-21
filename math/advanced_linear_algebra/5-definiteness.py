@@ -1,29 +1,15 @@
 #!/usr/bin/env python3
 
-"""
-This module provides a function to determine the definiteness of a matrix.
-"""
-
 import numpy as np
 
 def definiteness(matrix):
-    """
-    Calculates the definiteness of a matrix.
-
-    Parameters:
-    matrix (numpy.ndarray): The matrix whose definiteness is to be calculated.
-
-    Returns:
-    str: One of 'Positive definite', 'Positive semi-definite',
-    'Negative definite', 'Negative semi-definite', 'Indefinite', or None.
-
-    Raises:
-    TypeError: If the input is not a numpy.ndarray.
-    """
     if not isinstance(matrix, np.ndarray):
         raise TypeError("matrix must be a numpy.ndarray")
 
     if len(matrix.shape) != 2 or matrix.shape[0] != matrix.shape[1]:
+        return None
+
+    if not np.allclose(matrix, matrix.T):
         return None
 
     eigenvalues = np.linalg.eigvals(matrix)
@@ -55,14 +41,14 @@ if __name__ == '__main__':
     mat7 = np.array([[1, 2, 3], [4, 5, 6]])
     mat8 = [[1, 2], [1, 2]]
 
-    print(definiteness(mat1))  # Positive definite
-    print(definiteness(mat2))  # Positive semi-definite
-    print(definiteness(mat3))  # Negative semi-definite
-    print(definiteness(mat4))  # Negative definite
-    print(definiteness(mat5))  # Indefinite
-    print(definiteness(mat6))  # None
-    print(definiteness(mat7))  # None
+    print(definiteness(mat1))
+    print(definiteness(mat2))
+    print(definiteness(mat3))
+    print(definiteness(mat4))
+    print(definiteness(mat5))
+    print(definiteness(mat6))
+    print(definiteness(mat7))
     try:
         definiteness(mat8)
     except Exception as e:
-        print(e)  # matrix must be a numpy.ndarray
+        print(e)
