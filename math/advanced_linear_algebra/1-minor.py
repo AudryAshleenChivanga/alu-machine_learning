@@ -19,10 +19,11 @@ def minor(matrix):
     TypeError: If the input is not a list of lists.
     ValueError: If the matrix is not a non-empty square matrix.
     """
-    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
+    if not isinstance(matrix, list) or not all(
+            isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a list of lists")
 
-    if len(matrix) == 0 or not all(len(row) == len(matrix) for row in matrix):
+    if len(matrix) == 0 or any(len(row) != len(matrix) for row in matrix):
         raise ValueError("matrix must be a non-empty square matrix")
 
     size = len(matrix)
@@ -34,7 +35,8 @@ def minor(matrix):
     for i in range(size):
         minor_row = []
         for j in range(size):
-            sub_matrix = [row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:])]
+            sub_matrix = [row[:j] + row[j + 1:] for row in (
+                matrix[:i] + matrix[i + 1:])]
             minor_row.append(determinant(sub_matrix))
         minor_matrix.append(minor_row)
 
