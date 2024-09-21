@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 """
-This module provides a function to calculate the minor matrix of a given matrix.
+This module provides a function to calculate the minor matrix
+of a given matrix.
 """
 
 
@@ -10,7 +11,8 @@ def minor(matrix):
     Calculates the minor matrix of a matrix.
 
     Parameters:
-    matrix (list of lists): The matrix for which the minor matrix is calculated.
+    matrix (list of lists): The matrix for which the minor matrix
+    is calculated.
 
     Returns:
     list of lists: The minor matrix of the input matrix.
@@ -35,8 +37,9 @@ def minor(matrix):
     for i in range(size):
         minor_row = []
         for j in range(size):
-            sub_matrix = [row[:j] + row[j + 1:] for row in (
-                matrix[:i] + matrix[i + 1:])]
+            sub_matrix = [
+                row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:])
+            ]
             minor_row.append(determinant(sub_matrix))
         minor_matrix.append(minor_row)
 
@@ -48,7 +51,8 @@ def determinant(matrix):
     Calculates the determinant of a matrix using recursion.
 
     Parameters:
-    matrix (list of lists): The matrix for which the determinant is calculated.
+    matrix (list of lists): The matrix for which the determinant
+    is calculated.
 
     Returns:
     int/float: The determinant of the matrix.
@@ -92,7 +96,8 @@ if __name__ == '__main__':
     print(minor(mat1))  # Expected output: [[1]]
     print(minor(mat2))  # Expected output: [[4, 3], [2, 1]]
     print(minor(mat3))  # Expected output: [[1, 1], [1, 1]]
-    print(minor(mat4))  # Expected output: [[-12, -36, 0], [10, -34, -32], [47, 13, -16]]
+    print(minor(mat4))  # Expected output: [[-12, -36, 0], [10, -34, -32],
+                        # [47, 13, -16]]
 
     try:
         minor(mat5)
