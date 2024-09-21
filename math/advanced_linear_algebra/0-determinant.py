@@ -4,6 +4,7 @@
 This module provides a function to calculate the determinant of a matrix.
 """
 
+
 def determinant(matrix):
     """
     Calculates the determinant of a matrix using recursion.
@@ -40,6 +41,7 @@ def determinant(matrix):
 
     return determinant_value
 
+
 if __name__ == '__main__':
     mat0 = [[]]
     mat1 = [[5]]
@@ -49,18 +51,18 @@ if __name__ == '__main__':
     mat5 = []
     mat6 = [[1, 2, 3], [4, 5, 6]]
 
-    print(determinant(mat0))
-    print(determinant(mat1))
-    print(determinant(mat2))
-    print(determinant(mat3))
-    print(determinant(mat4))
+    print(determinant(mat0))  # Output: 1
+    print(determinant(mat1))  # Output: 5
+    print(determinant(mat2))  # Output: -2
+    print(determinant(mat3))  # Output: 0
+    print(determinant(mat4))  # Output: 192
 
     try:
         determinant(mat5)
     except Exception as e:
-        print(e)
+        print(e)  # Output: matrix must be a list of lists
 
     try:
         determinant(mat6)
     except Exception as e:
-        print(e)
+        print(e)  # Output: matrix must be a square matrix
