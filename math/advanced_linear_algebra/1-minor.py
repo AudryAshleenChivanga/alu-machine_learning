@@ -93,18 +93,17 @@ if __name__ == '__main__':
     mat5 = []
     mat6 = [[1, 2, 3], [4, 5, 6]]
 
-    print(minor(mat1))  # Expected output: [[1]]
-    print(minor(mat2))  # Expected output: [[4, 3], [2, 1]]
-    print(minor(mat3))  # Expected output: [[1, 1], [1, 1]]
-    print(minor(mat4))  # Expected output: [[-12, -36, 0], [10, -34, -32],
-                        # [47, 13, -16]]
+    print(minor(mat1))
+    print(minor(mat2))
+    print(minor(mat3))
+    print(minor(mat4))
 
     try:
         minor(mat5)
     except Exception as e:
-        print(e)  # Expected output: matrix must be a non-empty square matrix
+        print(e)
 
     try:
         minor(mat6)
     except Exception as e:
-        print(e)  # Expected output: matrix must be a non-empty square matrix
+        print(e)
