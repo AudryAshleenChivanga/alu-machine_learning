@@ -13,7 +13,8 @@ def inverse(matrix):
     matrix (list of lists): The matrix for which the inverse is calculated.
 
     Returns:
-    list of lists or None: The inverse of the matrix, or None if the matrix is singular.
+    list of lists or None: The inverse of the matrix, or None if the matrix
+    is singular.
 
     Raises:
     TypeError: If the input is not a list of lists.
@@ -23,7 +24,8 @@ def inverse(matrix):
             isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a list of lists")
 
-    if len(matrix) == 0 or any(len(row) != len(matrix) for row in matrix):
+    if len(matrix) == 0 or any(
+            len(row) != len(matrix) for row in matrix):
         raise ValueError("matrix must be a non-empty square matrix")
 
     det = determinant(matrix)
@@ -44,7 +46,8 @@ def adjugate(matrix):
     Calculates the adjugate matrix of a matrix.
 
     Parameters:
-    matrix (list of lists): The matrix for which the adjugate matrix is calculated.
+    matrix (list of lists): The matrix for which the adjugate matrix
+    is calculated.
 
     Returns:
     list of lists: The adjugate matrix of the input matrix.
@@ -57,7 +60,8 @@ def adjugate(matrix):
             isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a list of lists")
 
-    if len(matrix) == 0 or any(len(row) != len(matrix) for row in matrix):
+    if len(matrix) == 0 or any(
+            len(row) != len(matrix) for row in matrix):
         raise ValueError("matrix must be a non-empty square matrix")
 
     cofactor_matrix = cofactor(matrix)
@@ -73,7 +77,8 @@ def cofactor(matrix):
     Calculates the cofactor matrix of a matrix.
 
     Parameters:
-    matrix (list of lists): The matrix for which the cofactor matrix is calculated.
+    matrix (list of lists): The matrix for which the cofactor matrix
+    is calculated.
 
     Returns:
     list of lists: The cofactor matrix of the input matrix.
@@ -86,7 +91,8 @@ def cofactor(matrix):
             isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a list of lists")
 
-    if len(matrix) == 0 or any(len(row) != len(matrix) for row in matrix):
+    if len(matrix) == 0 or any(
+            len(row) != len(matrix) for row in matrix):
         raise ValueError("matrix must be a non-empty square matrix")
 
     size = len(matrix)
@@ -113,7 +119,8 @@ def determinant(matrix):
     Calculates the determinant of a matrix using recursion.
 
     Parameters:
-    matrix (list of lists): The matrix for which the determinant is calculated.
+    matrix (list of lists): The matrix for which the determinant
+    is calculated.
 
     Returns:
     int/float: The determinant of the matrix.
