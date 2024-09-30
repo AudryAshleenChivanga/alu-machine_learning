@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-This module contains the function summation_i_squared to calculate 
+This module contains the function summation_i_squared to calculate
 the sum of squares of integers.
 """
 
