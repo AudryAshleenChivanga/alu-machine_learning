@@ -1,13 +1,1 @@
-#!/usr/bin/env python3
-"""
-This script is for summation of the numbers in a file.
-"""
-
-def main():
-    """
-    This is the answer to question.
-    """
-    print("3")
-
-if __name__ == "__main__":
-    main()
+3
