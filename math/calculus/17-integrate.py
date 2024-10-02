@@ -8,11 +8,11 @@ integral of a polynomial.
 def poly_integral(poly, C=0):
     """
     Calculates the integral of a polynomial.
-    
+
     Parameters:
     poly (list): List of coefficients representing the polynomial.
     C (int, float): Integration constant.
-    
+
     Returns:
     list: List of coefficients representing the integral of the polynomial.
     """
@@ -22,7 +22,7 @@ def poly_integral(poly, C=0):
         return None
     if not isinstance(C, (int, float)):
         return None
-    
+
     integral = [C]
     for i, coef in enumerate(poly):
         integral_coef = coef / (i + 1)
@@ -31,5 +31,6 @@ def poly_integral(poly, C=0):
             integral.append(int(integral_coef))
         else:
             integral.append(integral_coef)
-    
+
     return integral
+
