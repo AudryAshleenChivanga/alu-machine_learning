@@ -1,50 +1,35 @@
 #!/usr/bin/env python3
-"""
-This module contains the function that calculates the
-integral of a polynomial.
-"""
+"""Translate mathematical operations into code"""
+
 
 def poly_integral(poly, C=0):
-    """
-    Calculates the integral of a polynomial.
+    """Calculates the integral of a polynomial.
 
-    Parameters:
-    poly (list): List of coefficients representing the polynomial.
-    C (int, float): Integration constant.
+    Args:
+        poly (list): A list of coefficients
+        representing a polynomial.
+        C (int or float): A constant to be added
+        to the integral.
 
     Returns:
-    list: List of coefficients representing the integral of the polynomial.
+        list: A new list of coefficients
+        representing the integral of the polynomial,
+        or None if the input is invalid.
     """
 
-
-    if not isinstance(poly, list) or not all(
-        isinstance(coef, (int, float)) for coef in poly
-    ):
+    if type(poly) != list or type(C) != int:
         return None
-    if not isinstance(C, (int, float)):
-        return None
-
     if len(poly) == 0:
-        return [C]
+        return None
 
     integral = [C]
-
-    for i, coef in enumerate(poly):
-        if coef == 0:
-            integral.append(0)
-        else:
-            integral_coef = coef / (i + 1)
-            if integral_coef.is_integer():
-                integral.append(int(integral_coef))
-            else:
-                integral.append(integral_coef)
-
-    while len(integral) > 1 and integral[-1] == 0:
-        integral.pop()
+    if poly == [0]:
+        return integral
+    idx = 1
+    for i in poly:
+        integral.append(i / idx)
+        if integral[idx] % 1 == 0:
+            integral[idx] = int(integral[idx])
+        idx += 1
 
     return integral
-
-# Test cases
-print(poly_integral(None))  # Expected: None
-print(poly_integral([]))    # Expected: [0]
-print(poly_integral([0]))   # Expected: [0]
