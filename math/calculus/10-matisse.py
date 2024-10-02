@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-This module contains the function that calculates the polynomial derivative of a list of coefficients.
+This module contains the function that calculates the polynomial
+derivative of a list of coefficients.
 """
 
 
@@ -20,3 +21,4 @@ def poly_derivative(poly):
     if derivative == [] or all(coeff == 0 for coeff in derivative):
         return [0]
     return derivative
+
