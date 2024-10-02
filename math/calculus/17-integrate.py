@@ -4,7 +4,6 @@ This module contains the function that calculates the
 integral of a polynomial.
 """
 
-
 def poly_integral(poly, C=0):
     """
     Calculates the integral of a polynomial.
@@ -22,14 +21,23 @@ def poly_integral(poly, C=0):
         return None
     if not isinstance(C, (int, float)):
         return None
-
+    
+    if len(poly) == 0:
+        return [C]
+    
     integral = [C]
+    
     for i, coef in enumerate(poly):
-        integral_coef = coef / (i + 1)
-        # Convert to int if the result is a whole number
-        if integral_coef.is_integer():
-            integral.append(int(integral_coef))
+        if coef == 0:
+            integral.append(0)  
         else:
-            integral.append(integral_coef)
+            integral_coef = coef / (i + 1)
+            if integral_coef.is_integer():
+                integral.append(int(integral_coef))
+            else:
+                integral.append(integral_coef)
 
+    while len(integral) > 1 and integral[-1] == 0:
+        integral.pop()
+    
     return integral
