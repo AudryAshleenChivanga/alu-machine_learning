@@ -33,4 +33,3 @@ def poly_integral(poly, C=0):
             integral.append(integral_coef)
 
     return integral
-
