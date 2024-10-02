@@ -1,20 +1,28 @@
 #!/usr/bin/env python3
 """
 This module contains the function that calculates the
-intergral of a polynomial.
+integral of a polynomial.
 """
 
 
-def poly_derivative(poly):
+def poly_integral(poly, C=0):
     """
     Calculates the integral of a polynomial.
+    
+    Parameters:
+    poly (list): List of coefficients representing the polynomial.
+    C (int, float): Integration constant.
+    
+    Returns:
+    list: List of coefficients representing the integral of the polynomial.
     """
-    if not isinstance(poly, list) or not all(isinstance(coef, (int, float))
-            for coef in poly):
+    if not isinstance(poly, list) or not all(
+        isinstance(coef, (int, float)) for coef in poly
+    ):
         return None
-    C = 0  # Define the constant C, you can change this value as needed
     if not isinstance(C, (int, float)):
         return None
+    
     integral = [C]
     for i, coef in enumerate(poly):
         integral_coef = coef / (i + 1)
@@ -23,4 +31,5 @@ def poly_derivative(poly):
             integral.append(int(integral_coef))
         else:
             integral.append(integral_coef)
+    
     return integral
