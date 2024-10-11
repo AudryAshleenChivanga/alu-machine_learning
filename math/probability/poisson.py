@@ -4,7 +4,6 @@
 class Poisson:
     """Represents a Poisson distribution"""
 
-
     def __init__(self, data=None, lambtha=1.):
         """
         Class constructor for Poisson distribution.
@@ -26,10 +25,10 @@ class Poisson:
             # Estimate lambtha as the mean of the data
             self.lambtha = float(sum(data) / len(data))
 
+
 # Example usage
 if __name__ == "__main__":
     # Generate a small sample of Poisson-like data manually
-    # Example data resembling a Poisson distribution
     data = [4, 5, 6, 5, 4, 5, 3, 6, 5, 5, 4, 6, 5, 7, 4, 5]
 
     # Creating instance with data
