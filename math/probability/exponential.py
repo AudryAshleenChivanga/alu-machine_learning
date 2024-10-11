@@ -1,17 +1,38 @@
 #!/usr/bin/env python3
-"""Exponential distribution class"""
+""" defines Exponential class that represents exponential distribution """
 
 
 class Exponential:
-    """Represents an exponential distribution"""
+    """
+    class that represents exponential distribution
+
+    class constructor:
+        def __init__(self, data=None, lambtha=1.)
+
+    instance attributes:
+        lambtha [float]: the expected number of occurrences in a given time
+
+    instance methods:
+        def pdf(self, x): calculates PDF for given time period
+        def cdf(self, x): calculates CDF for given time period
+    """
 
     def __init__(self, data=None, lambtha=1.):
         """
-        Class constructor for Exponential distribution.
+        class constructor
 
-        Parameters:
-        - data: list of data to estimate the distribution.
-        - lambtha: expected number of occurrences.
+        parameters:
+            data [list]: data to be used to estimate the distribution
+            lambtha [float]: the expected number of occurrences on a given time
+
+        Sets the instance attribute lambtha as a float
+        If data is not given:
+            Use the given lambtha or
+            raise ValueError if lambtha is not a positive value
+        If data is given:
+            Calculate the lambtha of data
+            Raise TypeError if data is not a list
+            Raise ValueError if data does not contain at least two data points
         """
         if data is None:
             if lambtha <= 0:
@@ -22,18 +43,36 @@ class Exponential:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-
-            # Calculate lambtha as the inverse of the mean of the data
             self.lambtha = 1 / (sum(data) / len(data))
 
+    def pdf(self, x):
+        """
+        calculates the value of the PDF for a given time period
 
-# Example usage
-if __name__ == "__main__":
-    # Sample data for testing
-    data = [0.2, 0.5, 0.1, 0.3, 0.4, 0.6]  # Example data points
+        parameters:
+            x [int]: time period
+                If x is out of range, return 0
 
-    e1 = Exponential(data)
-    print('Lambtha:', e1.lambtha)
+        return:
+            the PDF value for x
+        """
+        if x < 0:
+            return 0
+        e = 2.7182818285
+        return self.lambtha * (e ** (-self.lambtha * x))
 
-    e2 = Exponential(lambtha=2)
-    print('Lambtha:', e2.lambtha)  # Should print the provided lambtha: 2.0
+    def cdf(self, x):
+        """
+        calculates the value of the CDF for a given time period
+
+        parameters:
+            x [int]: time period
+                If x is out of range, return 0
+
+        return:
+            the CDF value for x
+        """
+        if x < 0:
+            return 0
+        e = 2.7182818285
+        return 1 - (e ** (-self.lambtha * x))
