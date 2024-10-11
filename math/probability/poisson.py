@@ -1,77 +1,94 @@
 #!/usr/bin/env python3
-"""Poisson distribution class"""
+""" defines Poisson class that represents Poisson distribution """
+
 
 class Poisson:
-    """Represents a Poisson distribution"""
+    """
+    class that represents Poisson distribution
+
+    class constructor:
+        def __init__(self, data=None, lambtha=1.)
+
+    instance attributes:
+        lambtha [float]: the expected number of occurances in a given time
+
+    instance methods:
+        def pmf(self, k): calculates PMF for given number of successes
+        def cdf(self, k): calculates CDF for given number of successes
+    """
 
     def __init__(self, data=None, lambtha=1.):
         """
-        Class constructor for Poisson distribution.
-        
-        Parameters:
-        - data: list of data to estimate the distribution.
-        - lambtha: expected number of occurrences.
+        class constructor
+
+        parameters:
+            data [list]: data to be used to estimate the distibution
+            lambtha [float]: the expected number of occurances on a given time
+
+        Sets the instance attribute lambtha as a float
+        If data is not given:
+            Use the given lambtha or
+            raise ValueError if lambtha is not positive value
+        If data is given:
+            Calculate the lambtha of data
+            Raise TypeError if data is not a list
+            Raise ValueError if data does not contain at least two data points
         """
         if data is None:
-            if lambtha <= 0:
+            if lambtha < 1:
                 raise ValueError("lambtha must be a positive value")
-            self.lambtha = float(lambtha)
+            else:
+                self.lambtha = float(lambtha)
         else:
-            if not isinstance(data, list):
+            if type(data) is not list:
                 raise TypeError("data must be a list")
-            if len(data) < 2:
-                raise ValueError("data must have multiple values")
-            
-            # Estimate lambtha as the mean of the data
-            self.lambtha = float(sum(data) / len(data))
+            elif len(data) < 2:
+                raise ValueError("data must contain multiple values")
+            else:
+                lambtha = float(sum(data) / len(data))
+                self.lambtha = lambtha
 
     def pmf(self, k):
         """
-        Calculates the PMF for a given number of successes k.
-        
-        Parameters:
-        - k: number of successes
-        
-        Returns:
-        - PMF value for k
+        calculates the value of the PMF for a given number of successes
+
+        parameters:
+            k [int]: number of successes
+                If k is not an int, convert it to int
+                If k is out of range, return 0
+
+        return:
+            the PMF value for k
         """
-        if not isinstance(k, int):
+        if type(k) is not int:
             k = int(k)
-        
         if k < 0:
             return 0
-        
-        return (self.lambtha ** k *
-                self._euler_exp(-self.lambtha)) / self._factorial(k)
+        e = 2.7182818285
+        lambtha = self.lambtha
+        factorial = 1
+        for i in range(k):
+            factorial *= (i + 1)
+        pmf = ((lambtha ** k) * (e ** -lambtha)) / factorial
+        return pmf
 
-    def _factorial(self, k):
-        """Calculates the factorial of k."""
-        if k == 0 or k == 1:
-            return 1
-        result = 1
-        for i in range(2, k + 1):
-            result *= i
-        return result
+    def cdf(self, k):
+        """
+        calculates the value of the CDF for a given number of successes
 
-    def _euler_exp(self, x):
-        """Approximates Euler's number raised to a power."""
-        n = 50  # Higher value gives better precision
-        result = 1.0
-        term = 1.0
-        for i in range(1, n + 1):
-            term *= x / i
-            result += term
-        return result
+        parameters:
+            k [int]: number of successes
+                If k is not an int, convert it to int
+                If k is out of range, return 0
 
-# Example usage
-if __name__ == "__main__":
-    # Poisson-like data sample
-    data = [4, 5, 6, 5, 4, 5, 3, 6, 5, 5, 4, 6, 5, 7, 4, 5]
-
-    # Instance with data
-    p1 = Poisson(data)
-    print(f'P(9): {p1.pmf(9):.10f}')  # Output to 10 decimal places
-
-    # Instance with lambtha
-    p2 = Poisson(lambtha=5)
-    print(f'P(9): {p2.pmf(9):.10f}')  # Output to 10 decimal places
+        return:
+            the CDF value for k
+        """
+        if type(k) is not int:
+            k = int(k)
+        if k < 0:
+            return 0
+        cdf = 0
+        for i in range(k + 1):
+            cdf += self.pmf(i)
+        return cdf
