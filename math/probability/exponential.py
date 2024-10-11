@@ -22,7 +22,7 @@ class Exponential:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            
+
             # Calculate lambtha as the inverse of the mean of the data
             self.lambtha = 1 / (sum(data) / len(data))
 
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     data = [0.2, 0.5, 0.1, 0.3, 0.4, 0.6]  # Example data points
 
     e1 = Exponential(data)
-    print('Lambtha:', e1.lambtha)  # Should print the lambtha estimated from the data
+    print('Lambtha:', e1.lambtha)
 
     e2 = Exponential(lambtha=2)
     print('Lambtha:', e2.lambtha)  # Should print the provided lambtha: 2.0
