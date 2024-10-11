@@ -1,47 +1,46 @@
 #!/usr/bin/env python3
 """Poisson distribution class"""
 
-
 class Poisson:
     """Represents a Poisson distribution"""
 
     def __init__(self, data=None, lambtha=1.):
         """
         Class constructor for Poisson distribution.
-
+        
         Parameters:
         - data: list of data to estimate the distribution.
         - lambtha: expected number of occurrences.
         """
         if data is None:
             if lambtha <= 0:
-                raise ValueError("lambtha must be positive")
+                raise ValueError("lambtha must be a positive value")
             self.lambtha = float(lambtha)
         else:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must have multiple values")
-
+            
             # Estimate lambtha as the mean of the data
             self.lambtha = float(sum(data) / len(data))
 
     def pmf(self, k):
         """
         Calculates the PMF for a given number of successes k.
-
+        
         Parameters:
         - k: number of successes
-
+        
         Returns:
         - PMF value for k
         """
         if not isinstance(k, int):
             k = int(k)
-
+        
         if k < 0:
             return 0
-
+        
         return (self.lambtha ** k *
                 self._euler_exp(-self.lambtha)) / self._factorial(k)
 
@@ -64,7 +63,6 @@ class Poisson:
             result += term
         return result
 
-
 # Example usage
 if __name__ == "__main__":
     # Poisson-like data sample
@@ -74,7 +72,6 @@ if __name__ == "__main__":
     p1 = Poisson(data)
     print(f'P(9): {p1.pmf(9):.10f}')  # Output to 10 decimal places
 
-
     # Instance with lambtha
     p2 = Poisson(lambtha=5)
-    print('P(9):', p2.pmf(9))  # Expected: 0.036265577412911795
+    print(f'P(9): {p2.pmf(9):.10f}')  # Output to 10 decimal places
