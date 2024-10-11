@@ -27,12 +27,10 @@ class Exponential:
             self.lambtha = 1 / (sum(data) / len(data))
 
 
+# Example usage
 if __name__ == "__main__":
-    # Test the Exponential class
-    import numpy as np
-
-    np.random.seed(0)
-    data = np.random.exponential(0.5, 100).tolist()
+    # Sample data for testing
+    data = [0.2, 0.5, 0.1, 0.3, 0.4, 0.6]  # Example data points
 
     e1 = Exponential(data)
     print('Lambtha:', e1.lambtha)  # Should print the lambtha estimated from the data
