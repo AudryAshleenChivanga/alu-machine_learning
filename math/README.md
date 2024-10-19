@@ -1,1 +1,1 @@
-Mathematics for machine learning 
+Bayesian probability
