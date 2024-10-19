@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Calculates the posterior probability that the probability of 
-developing severe side effects falls within a specific range given the 
+"""Calculates the posterior probability that the probability of
+developing severe side effects falls within a specific range given the
 data
 """
 
@@ -8,15 +8,15 @@ from scipy import special
 
 
 def posterior(x, n, p1, p2):
-    """Calculates the posterior probability that p is within the range 
+    """Calculates the posterior probability that p is within the range
     [p1, p2] given x and n.
-    
+
     Args:
         x (int): Number of patients with severe side effects.
         n (int): Total number of patients.
         p1 (float): Lower bound of the range.
         p2 (float): Upper bound of the range.
-        
+
     Returns:
         The posterior probability that p is within [p1, p2].
     """
@@ -33,7 +33,7 @@ def posterior(x, n, p1, p2):
         raise ValueError('p2 must be a float in the range [0, 1]')
     if p2 <= p1:
         raise ValueError('p2 must be greater than p1')
-    
+
     # Calculate the posterior probability using the beta distribution
-    return (special.btdtr(x + 1, n - x + 1, p2) - 
+    return (special.btdtr(x + 1, n - x + 1, p2) -
             special.btdtr(x + 1, n - x + 1, p1))
