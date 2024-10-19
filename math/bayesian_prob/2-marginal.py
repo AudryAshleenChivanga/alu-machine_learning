@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Function that calculates the intersection of obtaining this data
-with various hypothetical probabilities"""
+""""Function that calculates the marginal
+probability of obtaining the data"""
 
 import numpy as np
 
 
-def intersection(x, n, P, Pr):
-    """Function that calculates the intersection of obtaining
-    this data with the various hypothetical probabilities"""
+def marginal(x, n, P, Pr):
+    """"Function that calculates the marginal
+    probability of obtaining the data"""
     if type(n) is not int or n <= 0:
         raise ValueError("n must be a positive integer")
     if type(x) is not int or x < 0:
@@ -29,4 +29,5 @@ def intersection(x, n, P, Pr):
     den = np.math.factorial(x) * np.math.factorial(n - x)
     coeficient = num / den
     likehood = coeficient * (P ** x) * ((1 - P) ** (n - x))
-    return likehood * Pr
+    intersection = likehood * Pr
+    return np.sum(intersection)
