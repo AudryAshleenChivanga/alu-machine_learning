@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Function that works onthe same   convolution on grayscale images as in file 0"""
+"""Function that works convolution on grayscale images as in file 0"""
 
 import numpy as np
 
