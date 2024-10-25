@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """This function convolve grayscale images, its only using 2 for loops """
+
 import numpy as np
+
 def convolve_grayscale_valid(images, kernel):
     """Performs a valid convolution on grayscale images
     Args:
