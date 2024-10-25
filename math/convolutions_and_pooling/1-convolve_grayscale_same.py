@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
+
 """Function that works onthe same   convolution on grayscale images as in file 0"""
+
 import numpy as np
+
+
 def convolve_grayscale_same(images, kernel):
     """Performs a valid convolution on grayscale images
     Args:
