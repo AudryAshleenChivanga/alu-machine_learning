@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-defines Neuron class that defines
-a single neuron performing binary classification
+Defines Neuron class that defines
+a singular neuron performing binary classification
 """
 
 
@@ -10,7 +10,7 @@ import numpy as np
 
 class Neuron:
     """
-    Defines class Neuron that defines a single neuron
+    Class that defines a single neuron
     performing binary classification
     """
 
@@ -58,7 +58,7 @@ class Neuron:
 
     def cost(self, Y, A):
         """
-        Computes the cost of the model using logistic regression
+        Calculates the cost of the model using logistic regression
         """
         m = Y.shape[1]
         m_loss = np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A)))
@@ -84,3 +84,23 @@ class Neuron:
         d__b = (1 / m) * (np.sum(dz))
         self.__W = self.W - (alpha * d__W)
         self.__b = self.b - (alpha * d__b)
+
+    def train(self, X, Y, iterations=5000, alpha=0.05):
+        """
+        Training function for the neuron
+
+        - X is the numpy.ndarray with shape (nx, m) that
+        contains the input data
+        """
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations <= 0:
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha <= 0:
+            raise ValueError("alpha must be positive")
+        for itr in range(iterations):
+            A = self.forward_prop(X)
+            self.gradient_descent(X, Y, A, alpha)
+        return (self.evaluate(X, Y))
