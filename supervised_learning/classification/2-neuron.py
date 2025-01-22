@@ -58,4 +58,4 @@ class Neuron:
         z = np.matmul(self.__W, X) + self.__b
         sigmoid = 1 / (1 + np.exp(-z))
         self.__A = sigmoid
-        return self.__A 
+        return self.__A
