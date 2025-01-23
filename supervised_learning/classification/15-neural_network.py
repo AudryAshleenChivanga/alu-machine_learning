@@ -76,7 +76,7 @@ class NeuralNetwork:
 
     def forward_prop(self, X):
         """
-        Calculates the forward propagation of the neural network
+        Computes the forward propagation of the neural network
         """
         z1 = np.matmul(self.W1, X) + self.b1
         self.__A1 = 1 / (1 + (np.exp(-z1)))
@@ -95,7 +95,7 @@ class NeuralNetwork:
 
     def evaluate(self, X, Y):
         """
-        Evaluates the neural network's predictions
+        Calculates the prediction and cost of the neural network
         """
         A1, A2 = self.forward_prop(X)
         cost = self.cost(Y, A2)
@@ -104,7 +104,7 @@ class NeuralNetwork:
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """
-        Computes the gradient descent of the neural network
+        Computes one pass of the gradient descent on the neural network
         """
         m = Y.shape[1]
         dz2 = (A2 - Y)
@@ -113,7 +113,53 @@ class NeuralNetwork:
         dz1 = (np.matmul(self.W2.transpose(), dz2)) * (A1 * (1 - A1))
         d__W1 = (1 / m) * (np.matmul(dz1, X.transpose()))
         d__b1 = (1 / m) * (np.sum(dz1, axis=1, keepdims=True))
-        self.__W2 = self.W2 - (alpha * d__W2)
-        self.__b2 = self.b2 - (alpha * d__b2)
         self.__W1 = self.W1 - (alpha * d__W1)
         self.__b1 = self.b1 - (alpha * d__b1)
+        self.__W2 = self.W2 - (alpha * d__W2)
+        self.__b2 = self.b2 - (alpha * d__b2)
+
+    def train(self, X, Y, iterations=5000, alpha=0.05,
+              verbose=True, graph=True, step=100):
+        """
+        Training Function for the neural network
+        """
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations <= 0:
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha <= 0:
+            raise ValueError("alpha must be positive")
+        if verbose or graph:
+            if type(step) is not int:
+                raise TypeError("step must be an integer")
+            if step <= 0 or step > iterations:
+                raise ValueError("step must be positive and <= iterations")
+        if graph:
+            import matplotlib.pyplot as plt
+            x_points = np.arange(0, iterations + 1, step)
+            points = []
+        for itr in range(iterations):
+            A1, A2 = self.forward_prop(X)
+            if verbose and (itr % step) == 0:
+                cost = self.cost(Y, A2)
+                print("Cost after " + str(itr) + " iterations: " + str(cost))
+            if graph and (itr % step) == 0:
+                cost = self.cost(Y, A2)
+                points.append(cost)
+            self.gradient_descent(X, Y, A1, A2, alpha)
+        itr += 1
+        if verbose:
+            cost = self.cost(Y, A2)
+            print("Cost after " + str(itr) + " iterations: " + str(cost))
+        if graph:
+            cost = self.cost(Y, A2)
+            points.append(cost)
+            y_points = np.asarray(points)
+            plt.plot(x_points, y_points, 'b')
+            plt.xlabel("iteration")
+            plt.ylabel("cost")
+            plt.title("Training Cost")
+            plt.show()
+        return (self.evaluate(X, Y))
