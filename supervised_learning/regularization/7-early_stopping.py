@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+"""
+    Function def early_stopping(cost, opt_cost, threshold, patience, count):
+    that determines if you should stop gradient descent early:
+"""
+
+
 def early_stopping(cost, opt_cost, threshold, patience, count):
     """
     Determines if you should stop gradient descent early
