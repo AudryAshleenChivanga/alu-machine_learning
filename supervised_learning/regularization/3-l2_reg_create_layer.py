@@ -31,3 +31,4 @@ def l2_reg_create_layer(prev, n, activation, lambtha):
         kernel_initializer=weights_initializer,
         kernel_regularizer=l2_reg)
     return (layer(prev))
+
