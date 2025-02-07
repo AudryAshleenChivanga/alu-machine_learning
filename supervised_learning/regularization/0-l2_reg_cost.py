@@ -24,7 +24,6 @@ def l2_reg_cost(cost, lambtha, weights, L, m):
     for i in range(1, L + 1):
         level_weight = weights["W{}".format(i)]
         # Summing up the squared norms of all weight matrices
-        weights_squared += np.linalg.norm(level_weight)
-        
+        weights_squared += np.linalg.norm(level_weight)   
     l2_reg_cost = cost + (lambtha / (2 * m)) * weights_squared
     return l2_reg_cost
