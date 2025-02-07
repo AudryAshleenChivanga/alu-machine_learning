@@ -5,6 +5,7 @@ Implements L2 Regularization for computing the cost of a neural network.
 
 import numpy as np
 
+
 def l2_reg_cost(cost, lambtha, weights, L, m):
     """
     Computes the L2-regularized cost of a neural network.
@@ -12,7 +13,7 @@ def l2_reg_cost(cost, lambtha, weights, L, m):
     Parameters:
         cost: The original cost of the network without regularization.
         lambtha: Regularization parameter controlling the strength of L2 penalty.
-        weights: Dictionary containing the weights and biases of the neural network.
+        weights: Dictionary containing the weights and biases of the network.
         L: Total number of layers in the neural network.
         m: Number of training examples.
 
