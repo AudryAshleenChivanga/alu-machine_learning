@@ -1,31 +1,36 @@
 #!/usr/bin/env python3
 """
-    Function def early_stopping(cost, opt_cost, threshold, patience, count):
-    that determines if you should stop gradient descent early:
+    A function def dropout_create_layer(prev, n, activation, keep_prob):
+    that creates a layer of a neural network using dropout:
 """
 
 
-def early_stopping(cost, opt_cost, threshold, patience, count):
+import tensorflow as tf
+
+
+def dropout_create_layer(prev, n, activation, keep_prob):
     """
-    Determines if you should stop gradient descent early
+    Creates a layer of a neural network using dropout
 
     Args:
-        - cost: current validation cost of the neural network
-        - opt_cost: lowest recorded validation cost of the neural network
-        - threshold: threshold used for early stopping
-        - patience: patience count used for early stopping
-        - count: how long the threshold has not been met
+        - prev: tensor containing the output of the previous layer
+        - n: number of nodes the new layer should contain
+        - activation: activation function that should be used on the layer
+        - keep_prob: probability that a node will be kept
 
     Returns:
-        - Returns: a boolean of whether the network should be stopped early
-        followed by the updated count
+        - the tensor output of the new layer
     """
-    if cost < opt_cost - threshold:
-        opt_cost = cost
-        count = 0
-        return (False, count)
-    if cost >= opt_cost - threshold:
-        count += 1
-        if count == patience:
-            return (True, count)
-        return (False, count)
+    # Initialize weights with He initialization
+    initializer = tf.contrib.layers.variance_scaling_initializer(
+        mode="FAN_AVG"
+    )
+    layer = tf.layers.Dense(
+        units=n, activation=activation, kernel_initializer=initializer
+    )
+    output = layer(prev)
+
+    # Apply dropout
+    layer = tf.layers.dropout(output, rate=1 - keep_prob)
+
+    return layer
