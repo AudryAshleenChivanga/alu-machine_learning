@@ -26,3 +26,4 @@ def batch_norm(Z, gamma, beta, epsilon):
     Z_norm = (Z - mean) / ((variance + epsilon) ** 0.5)
     Z_tilda = gamma * Z_norm + beta
     return Z_tilda
+    

@@ -11,3 +11,4 @@ def normalize(X, m, s):
         s (_type_): _description_
     """
     return (X - m) / s
+    

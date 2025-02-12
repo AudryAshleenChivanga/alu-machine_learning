@@ -23,3 +23,4 @@ def create_batch_norm_layer(prev, n, activation):
     epsilon = 1e-8
     Z_norm = tf.nn.batch_normalization(Z, mean, variance, beta, gamma, epsilon)
     return activation(Z_norm)
+    

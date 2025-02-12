@@ -17,3 +17,4 @@ def create_momentum_op(loss, alpha, beta1):
 
     optimizer = tf.train.MomentumOptimizer(alpha, beta1)
     return optimizer.minimize(loss)
+    
