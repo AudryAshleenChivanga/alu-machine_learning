@@ -13,3 +13,4 @@ def shuffle_data(X, Y):
     """
     s = np.random.permutation(X.shape[0])
     return X[s], Y[s]
+    
