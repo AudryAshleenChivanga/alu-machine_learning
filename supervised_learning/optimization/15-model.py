@@ -285,4 +285,3 @@ def model(
             sess.run(tf.assign(global_step, global_step + 1))
             save_path = saver.save(sess, save_path)
     return save_path
- 
