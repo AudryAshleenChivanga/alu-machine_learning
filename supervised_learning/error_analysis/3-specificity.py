@@ -21,4 +21,3 @@ def specificity(confusion):
     false_pos = np.sum(confusion, axis=0) - true_pos
     true_neg = np.sum(confusion) - (true_pos + false_neg + false_pos)
     return true_neg / (true_neg + false_pos)
-    
