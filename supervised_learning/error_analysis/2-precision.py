@@ -17,3 +17,4 @@ def precision(confusion):
         (classes,): precision of each class
     """
     return np.diag(confusion) / np.sum(confusion, axis=0)
+    

@@ -17,3 +17,4 @@ def sensitivity(confusion):
         (classes,): sensitivity of each class
     """
     return np.diag(confusion) / np.sum(confusion, axis=1)
+    
