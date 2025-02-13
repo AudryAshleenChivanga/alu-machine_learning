@@ -12,4 +12,3 @@ def moving_average(data, beta):
         b = 1 - (beta ** (x + 1))
         result.append(v / b)
     return result
-    

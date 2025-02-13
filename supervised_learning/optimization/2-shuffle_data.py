@@ -25,4 +25,3 @@ def shuffle_data(X, Y):
     X_shuffled = X[shuffled_indexes]
     Y_shuffled = Y[shuffled_indexes]
     return (X_shuffled, Y_shuffled)
-    
