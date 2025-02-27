@@ -21,7 +21,7 @@ def get_user_location(api_url):
         if response.status_code == 403:
             reset_time = int(response.headers.get("X-RateLimit-Reset", time.time()))
             minutes_until_reset = max(0, (reset_time - time.time()) // 60)
-            print(f"Reset in {int(minutes_until_reset)} min")
+            print("Reset in {} min".format(int(minutes_until_reset)))
             return
         
         # Handle user not found
@@ -39,7 +39,7 @@ def get_user_location(api_url):
         # Handle other errors
         print("Error: Unable to fetch data")
     except requests.RequestException as e:
-        print(f"Request failed: {e}")
+        print("Request failed: {}".format(e))
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
